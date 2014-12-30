@@ -2,6 +2,7 @@
 #include<iostream>
 #include<stdlib.h>
 #include<math.h>
+#define MIN_INT -1000000
 
 using namespace std;
 
@@ -26,7 +27,9 @@ int max(int a , int b){
 int maxPathSum(Node* node, int &maxSum){
 
     if(node == NULL)
-        return 0;
+        return MIN_INT;
+    if(node->left == NULL && node->right == NULL)
+        return node->data;
 
     int pathSumLeft = maxPathSum(node->left,maxSum);
     int pathSumRight = maxPathSum(node->right,maxSum);
@@ -42,7 +45,7 @@ int maxPathSum(Node* node, int &maxSum){
 
 int main(){
 
-    struct Node *root = newNode(-15);
+    /*struct Node *root = newNode(-15);
     root->left = newNode(5);
     root->right = newNode(6);
     root->left->left = newNode(-8);
@@ -54,8 +57,16 @@ int main(){
     root->right->right->right= newNode(0);
     root->right->right->right->left= newNode(4);
     root->right->right->right->right= newNode(-1);
-    root->right->right->right->right->left= newNode(10);
-    int maxSum = 0 ;
+    root->right->right->right->right->left= newNode(10);*/
+    struct Node *root = newNode(1);
+    root->left = newNode(-2);
+    root->right = newNode(-3);
+    root->left->left = newNode(-4);
+    root->left->right = newNode(-5);
+    root->left->left->left = newNode(-8);
+    root->right->left = newNode(-6);
+    root->right->right = newNode(-7);
+    int maxSum = MIN_INT;
     int ret = maxPathSum(root,maxSum);
     cout << "Max pathSum of the given binary tree is " << maxSum;
     return 0;
