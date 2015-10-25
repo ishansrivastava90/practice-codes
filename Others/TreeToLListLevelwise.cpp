@@ -101,7 +101,7 @@ int main(){
 	cout<<"Printing all the lists\n";
 	for(it=v.begin();it!=v.end();it++){
 		printLinkedList(*it);
-		cout<<"\n";
-	}
+		cout<<"\n"
+;	}
 	return 0;
 }

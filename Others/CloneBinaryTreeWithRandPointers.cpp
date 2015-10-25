@@ -35,11 +35,12 @@ void setRandomPointers(Node* root){
 		return;
 
 	if(root->left != NULL){
-		root->left->rnd;
+		root->left->rnd = NULL;
 		if(root->rnd != NULL)		
 			root->left->rnd = root->rnd->left;
 	}
-	setRandomPointers(root->left);
+	if(root->left != NULL)
+		setRandomPointers(root->left->left);
 	setRandomPointers(root->right);
 	return;
 
@@ -63,7 +64,7 @@ Node  * cloneBinaryTree(Node* root){
 		return root;
 
 	Node* tempTree = createClone(root);
-	tempTree = setRandomPointers(tempTree);
+	setRandomPointers(tempTree);
 	Node* clone = restoreTree(tempTree);
 
 	return clone;
