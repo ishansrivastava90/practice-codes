@@ -1,7 +1,5 @@
 import java.util.Scanner;
-class StepfordHouse{
-
-
+class StepfordHouse {
 
     private static int mergeSortHeights(int [] heights, int begin, int end, int N){
 
@@ -87,7 +85,4 @@ class StepfordHouse{
         
     
     }
-
-
-
 }
