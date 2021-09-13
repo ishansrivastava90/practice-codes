@@ -1,5 +1,3 @@
-package Leetcode;
-
 import java.lang.System;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Stack;
@@ -17,7 +15,7 @@ public class NumberOfAtoms {
 
     public static String countOfAtoms(String formula) {
         Stack<SimpleEntry<String, Integer>> elementStack = new Stack<SimpleEntry<String,Integer>>();
-        TreeMap<String, Integer> results = new TreeMap<String, Integer>();
+        TreeMap<String, Integer> results = new TreeMap<>();
         
         // Populate the stack
         int i = 0;

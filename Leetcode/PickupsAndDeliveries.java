@@ -1,5 +1,3 @@
-package Leetcode;
-
 public class PickupsAndDeliveries {
     /*
         https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/submissions/
