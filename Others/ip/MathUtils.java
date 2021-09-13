@@ -1,5 +1,3 @@
-package ip;
-
 public final class MathUtils {
 	
 	public static double log2(int num) {

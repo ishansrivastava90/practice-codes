@@ -1,7 +1,6 @@
-package Others.java;
-
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class PackageManager {
@@ -27,7 +26,7 @@ public class PackageManager {
     private HashMap<String, List<String>> DependencyGraph;
     
     public PackageManager() {
-        InstalledPackages = new HashMap<>();
+        InstalledPackages = new HashMap<String, PackageInfo>();
         DependencyGraph = new HashMap<>();
 
     }
@@ -35,10 +34,8 @@ public class PackageManager {
      * Generates package dependencies and keeps them in-memory for the lifecycle of the pm object
      */
     public void generateDependencies(String packageName, String... dependencies) {
-        if (!DependencyGraph.containsKey(packageName)) {
-            if (!circularDependencies(packageName, dependencies)) {
+        if (!DependencyGraph.containsKey(packageName) && !detectCycles(packageName, new HashSet<String>())) {
                 DependencyGraph.put(packageName, Arrays.asList(dependencies));
-            }
         }
     }
 
@@ -60,12 +57,13 @@ public class PackageManager {
 
     public String removePackage(String packageName) {
         if (!InstalledPackages.containsKey(packageName)) {
-            return "Package not installed";
+            return packageName + " is not installed";
         }
         if (InstalledPackages.get(packageName).RefCount > 0) {
-            return "Package is still needed.";
+            return packageName + " is still needed.";
         }
         removeDependencies(packageName);
+        return "";
 
     }
 
@@ -91,23 +89,33 @@ public class PackageManager {
             return "No dependencies for package: " + packageName;
         }        
 
-        for (String dependency : DependencyGraph.get(packageName)) {
-            InstalledPackages.get(dependency).RefCount--;
-            PackageInfo packageInfo = InstalledPackages.get(dependency);
-            
+        for (String dp : DependencyGraph.get(packageName)) {
+            InstalledPackages.get(dp).RefCount--;
+			PackageInfo packageInfo = (PackageInfo)InstalledPackages.get(dp);            
 
-            if (InstalledPackages.get(dep).RefCount == 0 && ) {
-                
+            if (packageInfo.RefCount == 0) {
+                InstalledPackages.remove(dp);
+                System.out.println("Removing" + dp  );                
             }
-            else {
-                InstalledPackages.put(dep, new PackageInfo(PackageInfo.IMPLICIT_INTSTALL, 1));
-                installDependencies(dep);
-            }
+            removeDependencies(dp);
         }
-        return "Dependencies installed!";
+        return "";
     }
 
-    private boolean circularDependencies(String packageName, String... dependecnies) {
+    private boolean detectCycles(String packageName, HashSet<String>visited) {
+        if (!DependencyGraph.containsKey(packageName) || DependencyGraph.get(packageName).isEmpty()) {
+            return false;
+        }
+        visited.add(packageName);
+        for(String dp : DependencyGraph.get(packageName)) {
+            if (visited.contains(dp) || detectCycles(dp, visited)) {
+                return true;
+            }
+        }
+        visited.remove(packageName);
         return false;
     }
 }
+
+// TCP  -> NETCARD
+// NETCARD -> TCP

@@ -1,5 +1,3 @@
-package prac;
-
 public class SClass1  implements Comparable<SClass1>{
 	int height;
 	int weight;

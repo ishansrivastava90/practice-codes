@@ -1,5 +1,3 @@
-package prac;
-
 public final class MatrixPathFinder {
 	
 	private int [][] grid;

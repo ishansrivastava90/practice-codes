@@ -1,5 +1,3 @@
-package Others.java;
-
 import java.util.BitSet;
 
 public class PhoneNumAllocatorTree {

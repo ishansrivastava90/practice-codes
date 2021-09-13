@@ -1,10 +1,5 @@
-package prac;
-
-import ip.MathUtils;
-
 public class MaxBinaryGap {
-	
-	
+		
 	public static int findMaxGap(int num) {
 		if (num == 0) {
 			return 0;

@@ -1,5 +1,3 @@
-package prac;
-
 import java.math.BigDecimal;
 
 public class JumpingJack {
