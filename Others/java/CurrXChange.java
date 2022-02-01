@@ -125,6 +125,7 @@ public class CurrXChange {
 
 
     // Use Bellman Ford
+    // https://anilpai.medium.com/currency-arbitrage-using-bellman-ford-algorithm-8938dcea56ea
     public List<Rate> findBestRateWithNegativeCycles(Rate[] rates, String currency) {
         buildGraph(rates);
 
